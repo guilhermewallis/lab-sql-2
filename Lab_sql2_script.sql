@@ -26,14 +26,21 @@ max(length) as max_duration from film;
 select avg(length) from film;
 
 -- 8. What's the average movie duration expressed in format (hours, minutes)?
--- select cast(avg(length) as time) from film;
+select cast(
+	(round((avg(length) / 60 - 1) * 60) + 100) * 100 as time
+) as avg_duration from film;
 
 -- 9. How many movies longer than 3 hours?
 select count(length) from film
 where length > 180;
 
 -- 10. Get the name and email formatted
--- select concat(initcap(first_name), ' ', last_name, ' - ') as concat from customer;
+select concat(
+	left(first_name, 1),
+    lower(substring(first_name, 2, length(first_name))),
+    ' ', last_name,
+    ' - ', lower(email)
+) as concat from customer;
 
 -- 11. What's the length of the longest film title?
 select max(length(title)) from film;
