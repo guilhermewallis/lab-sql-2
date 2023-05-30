@@ -26,9 +26,7 @@ max(length) as max_duration from film;
 select avg(length) from film;
 
 -- 8. What's the average movie duration expressed in format (hours, minutes)?
-select cast(
-	(round((avg(length) / 60 - 1) * 60) + 100) * 100 as time
-) as avg_duration from film;
+select sec_to_time(avg(length) * 60) AS avg_duration from film;
 
 -- 9. How many movies longer than 3 hours?
 select count(length) from film
